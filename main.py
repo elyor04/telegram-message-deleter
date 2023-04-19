@@ -16,8 +16,8 @@ import sys
 WORK_DIR = Path(sys.argv[0]).parent / "data"
 WORK_DIR.mkdir(exist_ok=True)
 
-API_ID = 28126541
-API_HASH = "9d6c0391efbe2ff7b853545318418095"
+API_ID = ...
+API_HASH = ...
 
 
 class MyWindow(QMainWindow, Ui_MainWindow):
