@@ -1,5 +1,7 @@
-"""pyuic6 -o ui_form.py /Users/elyor/Documents/qt-projects/tg-app-ui/mainwindow.ui
-pyinstaller main.py --onefile --windowed --icon="/Users/elyor/Downloads/Hopstarter-Soft-Scraps-Email-Delete.ico" --name Deleter"""
+"""
+pyuic6 -o ui_form.py ""
+pyinstaller main.py --onefile --windowed --icon="" --name Deleter
+"""
 from pyrogram import Client
 from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.enums.chat_type import ChatType
