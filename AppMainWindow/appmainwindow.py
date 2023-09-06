@@ -21,6 +21,11 @@ WORK_DIR = Path(sys.argv[0]).parent / "data"
 WORK_DIR.mkdir(exist_ok=True)
 
 
+def regExValidator(regEx: str) -> QRegularExpressionValidator:
+    regEx = QRegularExpression(regEx)
+    return QRegularExpressionValidator(regEx)
+
+
 class AppMainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent: QWidget = None) -> None:
         super().__init__(parent)
@@ -32,10 +37,8 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         self._init_ui()
 
     def _init_ui(self) -> None:
-        regEx = QRegularExpression("[+]?[0-9]+")
-        uInt = QRegularExpressionValidator(regEx)
-        self.number.setValidator(uInt)
-        self.code.setValidator(uInt)
+        self.number.setValidator(regExValidator("[+]?[0-9 ]+"))
+        self.code.setValidator(regExValidator("[0-9]+"))
 
         self.loginBut.clicked.connect(self.login_button)
         self.deleteBut.clicked.connect(self.delete_button)
@@ -75,8 +78,8 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         if self.loginStep == 0:
             if (not self.client.is_connected) and (await self.client.connect()):
                 return await self._setUpUserProfile()
-            pNumber = self.number.text()
-            if len(pNumber) != 9:
+            pNumber = self.number.text().replace(" ", "")
+            if pNumber == "":
                 return
             try:
                 self.code_hash = (await self.client.send_code(pNumber)).phone_code_hash
@@ -94,7 +97,7 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
             code = self.code.text()
             if code == "":
                 return
-            pNumber = "+998" + self.number.text().strip("+")
+            pNumber = self.number.text().replace(" ", "")
             try:
                 await self.client.sign_in(pNumber, self.code_hash, code)
             except SessionPasswordNeeded:
