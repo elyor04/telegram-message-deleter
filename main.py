@@ -16,8 +16,8 @@ import sys
 WORK_DIR = Path(sys.argv[0]).parent / "data"
 WORK_DIR.mkdir(exist_ok=True)
 
-API_ID = ...
-API_HASH = ...
+API_ID = 28126541
+API_HASH = "9d6c0391efbe2ff7b853545318418095"
 
 
 class MyWindow(QMainWindow, Ui_MainWindow):
@@ -49,7 +49,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.show()
 
     async def _setUpUserProfile(self) -> None:
-
         self.loginInfo.setText("Login is successful")
         self.number.setEnabled(True)
         self.code.setEnabled(False)
@@ -74,7 +73,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.usrUsrname.setText(usr.username)
 
     async def _login(self) -> None:
-
         if self.loginStep == 0:
             if (not self.client.is_connected) and (await self.client.connect()):
                 return await self._setUpUserProfile()
@@ -124,7 +122,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 await self._setUpUserProfile()
 
     async def _delete(self) -> None:
-
         delFrom = set()
         if self.pChatsCheck.isChecked():
             delFrom.add(ChatType.PRIVATE)
@@ -159,7 +156,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             self.password.setEchoMode(QLineEdit.EchoMode.Password)
 
     def refresh_button(self) -> None:
-
         (WORK_DIR / "myAccount.session").unlink(True)
         (WORK_DIR / "myAccount.session-journal").unlink(True)
         self.client = Client("myAccount", API_ID, API_HASH, workdir=WORK_DIR)
@@ -186,8 +182,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.client.run(self._delete())
 
 
-app = QApplication(sys.argv)
-win = MyWindow()
-
 if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    win = MyWindow()
     sys.exit(app.exec())
