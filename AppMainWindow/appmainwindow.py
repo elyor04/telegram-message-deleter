@@ -73,10 +73,9 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         if self.loginStep == 0:
             if (not self.client.is_connected) and (await self.client.connect()):
                 return await self._setUpUserProfile()
-            pNumber = self.number.text().strip("+")
+            pNumber = self.number.text()
             if len(pNumber) != 9:
                 return
-            pNumber = "+998" + pNumber
             try:
                 self.code_hash = (await self.client.send_code(pNumber)).phone_code_hash
             except:
