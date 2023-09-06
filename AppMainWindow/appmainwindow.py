@@ -27,8 +27,8 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         self.client = Client("myAccount", API_ID, API_HASH, workdir=WORK_DIR)
         self.loginStep = 0
 
-        self._init_ui()
         self.setupUi(self)
+        self._init_ui()
         self.login_button()
 
     def _init_ui(self) -> None:
