@@ -21,8 +21,8 @@ WORK_DIR = Path(sys.argv[0]).parent / "data"
 WORK_DIR.mkdir(exist_ok=True)
 
 
-def regExValidator(regEx: str) -> QRegularExpressionValidator:
-    regEx = QRegularExpression(regEx)
+def regExValidator(pattern: str) -> QRegularExpressionValidator:
+    regEx = QRegularExpression(pattern)
     return QRegularExpressionValidator(regEx)
 
 
