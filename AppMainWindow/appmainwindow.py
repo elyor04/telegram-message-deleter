@@ -32,8 +32,6 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         self.login_button()
 
     def _init_ui(self) -> None:
-        self.setWindowTitle("Message Deleter")
-
         onlyInt = QIntValidator()
         onlyInt.setRange(0, 999999999)
         self.number.setValidator(onlyInt)

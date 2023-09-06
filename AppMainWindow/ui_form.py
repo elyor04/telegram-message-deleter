@@ -136,7 +136,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Message Deleter"))
         self.groupBox.setTitle(_translate("MainWindow", "Login"))
         self.label.setText(_translate("MainWindow", "Phone number:"))
         self.label_2.setText(_translate("MainWindow", "Code:"))
