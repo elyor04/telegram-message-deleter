@@ -30,7 +30,6 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
 
         self.setupUi(self)
         self._init_ui()
-        self.login_button()
 
     def _init_ui(self) -> None:
         regEx = QRegularExpression("[+]?[0-9]+")
@@ -44,6 +43,9 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         self.pswdCheck.stateChanged.connect(self.password_check)
         self.starting.setDate(date.today())
         self.ending.setDate(date.today())
+
+        self.gridLayout_3.activate()
+        self.login_button()
 
     async def _setUpUserProfile(self) -> None:
         self.loginInfo.setText("Login is successful")
