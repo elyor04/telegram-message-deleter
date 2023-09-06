@@ -1,12 +1,13 @@
 """
-pyuic6 -o ui_form.py ""
+pyuic6 -o ui_form.py "path/to/file.ui"
 pyinstaller main.py --onefile --windowed --icon="" --name Deleter
 """
 from pyrogram import Client
 from pyrogram.errors import SessionPasswordNeeded
 from pyrogram.enums.chat_type import ChatType
 from PyQt6.QtWidgets import QMainWindow, QWidget, QLineEdit
-from PyQt6.QtGui import QIntValidator, QPixmap
+from PyQt6.QtGui import QRegularExpressionValidator, QPixmap
+from PyQt6.QtCore import QRegularExpression
 from .ui_form import Ui_MainWindow
 from datetime import datetime, date, timedelta
 from threading import Timer
@@ -32,10 +33,10 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         self.login_button()
 
     def _init_ui(self) -> None:
-        onlyInt = QIntValidator()
-        onlyInt.setRange(0, 999999999)
-        self.number.setValidator(onlyInt)
-        self.code.setValidator(onlyInt)
+        regEx = QRegularExpression("[+]?[0-9]+")
+        uInt = QRegularExpressionValidator(regEx)
+        self.number.setValidator(uInt)
+        self.code.setValidator(uInt)
 
         self.loginBut.clicked.connect(self.login_button)
         self.deleteBut.clicked.connect(self.delete_button)
