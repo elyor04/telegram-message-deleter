@@ -1,6 +1,5 @@
 """
 pyuic6 -o ui_form.py "path/to/file.ui"
-pyinstaller main.py --onefile --windowed --icon="" --name Deleter
 """
 from pyrogram import Client
 from pyrogram.errors import SessionPasswordNeeded
