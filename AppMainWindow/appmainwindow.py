@@ -126,7 +126,7 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
         if self.pChatsCheck.isChecked():
             delFrom.add(ChatType.PRIVATE)
         if self.groupsCheck.isChecked():
-            delFrom.add(ChatType.GROUP)
+            delFrom.update({ChatType.GROUP, ChatType.SUPERGROUP})
 
         sDate = self.starting.date().toPyDate()
         eDate = self.ending.date().toPyDate()
@@ -138,10 +138,9 @@ class AppMainWindow(QMainWindow, Ui_MainWindow):
                 continue
             async for m in self.client.get_chat_history(d.chat.id, offset_date=eDate):
                 if sDate <= m.date.date():
-                    if (d.chat.type == ChatType.GROUP) and (m.from_user.id != usrId):
-                        continue
                     try:
-                        await self.client.delete_messages(d.chat.id, m.id)
+                        if m.from_user.id == usrId:
+                            await self.client.delete_messages(d.chat.id, m.id)
                     except:
                         pass
                 else:
